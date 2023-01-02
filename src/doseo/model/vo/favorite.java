@@ -10,7 +10,10 @@ public class favorite extends Book {
 	}
 
 	public favorite(int bookId, String bookName, String author) {
-		super(bookId, bookName, author);
+		super.setBookId(bookId);
+		super.setBookName(bookName);
+		super.setAuthor(author);
+		
 	}
 
 	public favorite(int bookId, String bookName, String author, String favorites) {
@@ -30,7 +33,7 @@ public class favorite extends Book {
 
 	@Override
 	public String toString() {
-		return "도서등록번호 = " + super.getBookId() + ", 도서명 = " + super.getBookName() + ", 저자 = "  + super.getAuthor();
+		return "도서등록번호 = " + super.getBookId() + ", 도서명 = " + super.getBookName() + ", 저자 = "  + super.getAuthor() + "\n";
 	}
 
 	

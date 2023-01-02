@@ -1,5 +1,6 @@
 package doseo.model.service;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class BookService {
 				case 3 : update(); break;
 				case 4 : delete(); break;
 				case 5 : favorites(); break;
+				case 6 :  break;
 				case 0 : System.out.println("프로그램을 종료합니다."); break;
 				default : System.out.println("위의 메뉴중에서 입력하세요");	
 				}
@@ -76,6 +78,7 @@ public class BookService {
 		} else {
 			for (Book bk : book) {
 				System.out.println(bk);
+				
 			}
 		}
 	}
@@ -152,6 +155,7 @@ public class BookService {
 			System.out.print("즐겨찾기 할 책 이름 : ");
 			String bookName = sc.next();
 			
+			boolean flag = true;
 			for(int i = 0; i < book.size(); i++) {
 				if(bookName.equals(book.get(i).getBookName())) {
 					int bookNum = count++;
@@ -160,12 +164,18 @@ public class BookService {
 					
 					if(favor.add(new favorite(bookNum, title, author))) {
 						System.out.println(title + "의 도서가 즐겨찾기에 추가되었습니다.");
+						text();
+						System.out.println("===== 즐겨찾기 등록된 내용 =====");
+						text2();
+						flag = false;
 					}
 					break;
-				} else {
-					System.out.println("입력된 정보가 없습니다.");
 				}
 			}
+			if(flag) {
+				System.out.println("등록된 책이 없습니다.");
+			}
+				
 		}
 					
 	}
@@ -203,7 +213,36 @@ public class BookService {
 		
 	}
 			
-	
+	public void text2() {
+		
+		
+		FileReader rule = null;
+		
+		try {
+			rule = new FileReader("favorites.txt");
+			
+			while(true) {
+				int data = rule.read();
+				
+				if(data == -1) {
+					break;
+				}
+				
+				System.out.print((char)data);
+				
+			}
+			System.out.println();
+		} catch(IOException e) {
+			System.out.println("파일이 없습니다.");
+		} finally {
+			try {
+				rule.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	
 	
